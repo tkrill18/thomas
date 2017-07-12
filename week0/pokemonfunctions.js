@@ -38,6 +38,7 @@ function randSentence() {
     console.log("randSentence generated '" + sentence + "'.");
     return sentence;
 }
+// randSentence();
 
 //  5)
 //      A)
