@@ -1,5 +1,4 @@
-// MAIN
-// 2)
+//  MAIN 2)     New array with six nested arrays.
 var party = [
     [
         "Pikachu",
@@ -51,14 +50,16 @@ var party = [
     ]
 ];
 
-// 3)
+//  MAIN 3)     Loops through the primary array and logs each of the subarrays
+//              to the console.
 var basicPrint = function(party) {
     for (var i = 0; i < party.length; i++) {
         console.log(party[i]);
     }
 }
 
-// 4)
+//  MAIN 4)     Loops through the primary array and prints out the statistics
+//              in a clean format.
 var cleanPrint = function(party) {
     for (var i = 0; i < party.length; i++) {
         pokemonPrint(party[i], i + 1);
@@ -81,8 +82,7 @@ var pokemonPrint = function(pokemon, index) {
                 );
 }
 
-// BONUS
-// 1)
+//  BONUS 1)    Gets user input to create a new Pokemon array.
 var prompt = require('prompt-sync')();
 var createNewPokemon = function(party) {
     /*
@@ -126,7 +126,7 @@ var promptBoolean = function(message) {
         }
     }
 }
-// 2)
+//  BONUS 2)    Gets user input to see if a certain Pokemon is in the roster.
 var searchRoster = function(party) {
     var query = prompt("Enter the NAME of the pokemon you would like to see: ");
     var wasFound = false;

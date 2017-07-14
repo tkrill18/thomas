@@ -1,4 +1,4 @@
-var promptSync = require('prompt-sync')();
+var prompt = require('prompt-sync')();
 //
 // get input from the user.
 //
@@ -9,7 +9,7 @@ var items = [];
 
 while (money > 99) {
     console.log("You have $" + money + " left. Sword = $500, Food = $100");
-    var answer = promptSync("Which item do you want to buy? ");
+    var answer = prompt("Which item do you want to buy? ");
     if (answer == "Sword") {
         money = money - 500;
         items.push("Sword");
@@ -24,3 +24,6 @@ while (money > 99) {
         console.log("I didn't understand your answer. Try again.")
     }
 }
+
+
+
