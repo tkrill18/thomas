@@ -1,4 +1,5 @@
-//  MAIN 2)
+//  MAIN 2)     Creates a new array with 6 objects inside of it.
+// Creates the Pokemon object.
 var Pokemon = function(name, type, hp, atk, def, legend) {
     this.name = name;
     this.type = type;
@@ -8,6 +9,7 @@ var Pokemon = function(name, type, hp, atk, def, legend) {
     this.legend = legend;
 }
 
+// Creates an array with 6 instances of the Pokemon object.
 var myParty = [
     new Pokemon(
         "Pikachu",
@@ -59,7 +61,7 @@ var myParty = [
     )
 ];
 
-//  MAIN 3)
+//  MAIN 3)     Loops through the primary array and logs each object's 
 var printRoster = function(party) {
     for (var i = 0; i < party.length; i++) {
         console.log("");
@@ -73,7 +75,7 @@ var printRoster = function(party) {
     }
 }
 
-//  4)
+//  MAIN 4)
 var pokemonAttacked = function(party) {
     for (var i = 0; i < party.length; i++) {
         party[i].hp -= 10;
@@ -120,8 +122,7 @@ var shuffle = function(array) {
     }
 }
 
-var pokemonBattle = function(playerParty, opponentParty, opponentName) {
-
+var pokemonBattleV1 = function(playerParty, opponentParty, opponentName) {
     // Copies parties by value.
     var newPlay = playerParty.slice();
     var newOppo = opponentParty.slice();
@@ -138,13 +139,7 @@ var pokemonBattle = function(playerParty, opponentParty, opponentName) {
     console.log("You are challenged by " + opponentName + ".");
     console.log(opponentName + " sent out " + oppoSelect[0].name + " and " + oppoSelect[1].name + ".");
     console.log(playSelect[0].name + " and " + playSelect[1].name + ", I choose you!");
-
-//  BONUS 5)
-    
-
 }
-
-
 
 var oppoParty = [
     new Pokemon(
@@ -197,5 +192,67 @@ var oppoParty = [
     )
 ];
 
-pokemonBattle(myParty, oppoParty, "Gary");
-// printRoster(myParty);
+//pokemonBattleV1(myParty, oppoParty, "Gary");
+
+//  BONUS 5)
+
+var pokemonBattleV2 = function(playerParty, opponentParty, opponentName) {
+    // Copies parties by value.
+    var newPlay = playerParty.slice();
+    var newOppo = opponentParty.slice();
+
+    // Shuffles the parties.
+    shuffle(newPlay);
+    shuffle(newOppo);
+
+    // Splices off the first two pokemon, which are random b/c shuffle.
+    var playSelect = newPlay.splice(0, 2);
+    var oppoSelect = newOppo.splice(0, 2); 
+
+    // Displays opening battle text.
+    console.log("You are challenged by " + opponentName + ".");
+    console.log(opponentName + " sent out " + oppoSelect[0].name + " and " + oppoSelect[1].name + ".");
+    console.log(playSelect[0].name + " and " + playSelect[1].name + ", I choose you!");
+    console.log("    BATTLE");
+    // Determines the winning team.
+    var playTotal = totalPartyStats(playSelect);
+    var oppoTotal = totalPartyStats(oppoSelect);
+
+    // Displays the corresponding message.
+    if (playTotal == oppoTotal) {
+        console.log("It's a tie.")
+    }
+    else if (playTotal > oppoTotal) {
+        console.log(opponentName + " was defeated.");
+        console.log("Your best Pokemon was " + getBestPkmn(playSelect) + ".");
+    }
+    else {
+        console.log(opponentName + " defeated you.")
+        console.log(getBestPkmn(oppoSelect) + " was " + opponentName + "'s best Pokemon.");
+    }
+}
+
+// Returns the sum of a given pokemon's hp, attack, and defense stats.
+var totalPkmnStats = function(pokemon) {
+    return pokemon.hp + pokemon.atk + pokemon.def;
+}
+
+// Returns the sum of a given party's pokemons' stats.
+var totalPartyStats = function(party) {
+    var total = 0;
+    for (var i = 0; i < party.length; i++) {
+        total += totalPkmnStats(party[i]);
+    }
+    return total;
+}
+
+var getBestPkmn = function(party) {
+    if (totalPkmnStats(party[0]) > totalPkmnStats(party[1])) {
+        return party[0].name;
+    }
+    else {
+        return party[1].name;
+    }
+}
+
+pokemonBattleV2(myParty, oppoParty, "Gary");

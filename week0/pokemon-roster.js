@@ -67,7 +67,7 @@ var cleanPrint = function(party) {
 }
 var pokemonPrint = function(pokemon, index) {
     var name   = pokemon[0];
-    var type   = pokemon[1];
+    var type   = pokemon[1]; 
     var hp     = pokemon[2];
     var def    = pokemon[3];
     var atk    = pokemon[4];
@@ -140,8 +140,8 @@ var searchRoster = function(party) {
         console.log("Unable to find '" + query + "' in the roster. Try again.");
     }
 }
-createNewPokemon(party);
+//createNewPokemon(party);
 basicPrint(party);
-// cleanPrint(party);
+ cleanPrint(party);
 // searchRoster(party);
 
