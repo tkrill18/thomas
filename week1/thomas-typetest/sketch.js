@@ -85,7 +85,8 @@ function keyTyped() {
     // Checks if there are no more lines left.
     if (lineIndex >= lyrics.length - 1) {
         userString = "";
-        message = "Game Complete. Words Per Minute: " + wordsPerMinute;
+        finalWordsPerMinute = wordsPerMinute;
+        message = "Game Complete. Words Per Minute: " + finalWordsPerMinute;
     }
 }
 
