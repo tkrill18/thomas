@@ -61,7 +61,7 @@ var myParty = [
     )
 ];
 
-//  MAIN 3)     Loops through the primary array and logs each object's 
+//  MAIN 3)     Loops through the primary array and logs each object's stats.
 var printRoster = function(party) {
     for (var i = 0; i < party.length; i++) {
         console.log("");
