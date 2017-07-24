@@ -62,7 +62,7 @@ function draw() {
     // Draws Your Spaceship Character.
     fill("lime");
     rect(spaceshipX, spaceshipY, charSideLength, charSideLength);
-    // Draws the Spaceship's Projectiles.
+    // Draws and advances the Spaceship's Projectiles.
     for (var i = 0; i < spaceshipProjectiles.length; i++) {
         // Draws only the projectiles that have yet to collide.
         if (spaceshipProjectiles[i].hasCollided == false) {
@@ -71,7 +71,7 @@ function draw() {
             spaceshipProjectiles[i].yPos -= projectileSpeed;
         }
     }
-    // Draws the Aliens' Projectiles.
+    // Draws and advances the Aliens' Projectiles.
     fill("pink");
     for (var i = 0; i < alienProjectiles.length; i++) {
         // Draws only the projectiles that have yet to collide.
@@ -182,7 +182,13 @@ var checkCollisions = function () {
                 if (abs(spaceshipY - alienProjectiles[i].yPos) <= charSideLength) {
                     alienProjectiles[i].hasCollided = true;
                     console.log("SHIP DOWN!");
-                    textSize(64);
+                    textSize(72);
+                    textAlign(CENTER);
+                    textFont("Segoe UI");
+                    fill("black");
+                    textStyle(BOLD);
+                    stroke("pink");
+                    strokeWeight(5);
                     text("GAME OVER", width/2, height/2);
                     noLoop();
                 }
