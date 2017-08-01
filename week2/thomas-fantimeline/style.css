@@ -1,0 +1,54 @@
+body {
+    /* 1 */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; /* As used by GitHub */
+    /* 2 */
+    background: lightskyblue; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(midnightblue, lightskyblue); /* Safari, Chrome */
+    background: -o-linear-gradient(midnightblue, lightskyblue); /* Opera */
+    background: -moz-linear-gradient(midnightblue, lightskyblue); /* Firefox */
+    background: linear-gradient(midnightblue, lightskyblue); /* Standard */
+    /* 3 */
+    font-size: 18px;
+    max-width: 700px;
+    margin: auto;
+}
+
+h1 {
+    font-size: 64px;
+    text-shadow: 0 0 30px dodgerblue;
+}
+
+.header {
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+img {
+    width: 200px;
+}
+
+div.timeline-event {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    margin: 20px;
+    border-radius: 25px;
+}
+
+div.timeline-event:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+span {
+    color: dodgerblue;
+    text-shadow: 0 0 30px white;
+}
+
+div.timeline-event p {
+    color: black;
+    padding-left: 40px;
+    padding-right: 20px;
+    text-align: justify;
+}
+
+

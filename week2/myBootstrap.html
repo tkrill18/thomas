@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <!-- This meta tag grabs the viewport (window size) of the device the website is being viewed from; 
+        used to make websites dynamic and responsive. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main minified Bootstrap CSS stylesheet. -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css">   
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">    -->
+    <!-- Minified jQuery JS script (required BEFORE reference to the bootstrap.min.js file). -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <!-- Main minified Bootstrap JS script. -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+            transition: left 300ms ease;
+            position: relative;
+            margin: 0;
+        }
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        body.sb-hidden {
+            left:0px;
+        }
+
+        body.sb-expanded {
+            left:250px;
+        }
+
+        .portfolio-item {
+            margin-bottom: 25px;
+        }
+
+        footer {
+            margin: 50px 0;
+        }
+
+        #brand-logo {
+            max-height: 30px;
+        }
+
+        nav.sidebar {
+            padding: 30px;
+            padding-top: 70px;
+            position: fixed; 
+            top: 0px; 
+            bottom: 0px; 
+            height: 100%; 
+            display: block;
+            background-color: white;
+            box-shadow: rgba(0, 0, 0, 0.1) -5px 0px 10px 0px, rgba(0, 0, 0, 0.2) -5px 0px 30px 0px;
+            z-index: 999;
+        }
+
+        nav.sidebar-expanded {
+            left: 0px; 
+            width: 250px;
+            transition: left 300ms ease; 
+        }
+
+        nav.sidebar-hidden { 
+            left: -250px; 
+            width: 250px; 
+            transition: left 300ms ease;
+        }
+
+        div.menu-fixed-button {
+            display: inline-block;
+            font-size: 2em;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            background-color: rgba(0,0,0,0.15);
+            border-radius: 0px;
+            text-align: center;
+            position: fixed;
+            z-index: 999;
+            top: 70px;
+            left: 5px;
+            transition: all 0.125s ease-in-out 0s;
+            border-radius: 5px;
+            color: white;
+            z-index: 999;
+        }
+
+        div.menu-fixed-button-hidden {
+            left: 5px;
+        }
+
+        div.menu-fixed-button-expanded {
+            left: 255px;
+        }
+
+        /* Pop Up Panel */
+        @keyframes bounceInUp {
+            0%, 100% {
+                -webkit-transition-timing-function: cubic-bezier(0.23, 0.77, 0.34, 0.99);
+                transition-timing-function: cubic-bezier(0.23, 0.77, 0.34, 0.99);
+            }
+            0% {
+                -webkit-transform: translate3d(0, 150%, 0);
+                transform: translate3d(0, 150%, 0);
+            }
+
+            100% {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes bounceOutDown {
+            0%, 100% {
+                -webkit-transition-timing-function: cubic-bezier(0.23, 0.77, 0.34, 0.99);
+                transition-timing-function: cubic-bezier(0.23, 0.77, 0.34, 0.99);
+            }
+
+            0% {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+
+            100% {
+                -webkit-transform: translate3d(0, 150%, 0);
+                transform: translate3d(0, 150%, 0);
+            }
+        }
+
+        .panel {
+            margin-bottom: 20px;
+            background-color: #fff;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+            box-shadow: 0 1px 1px rgba(0,0,0,.05);
+        }
+        
+        .panel-default {
+            border-color: #ddd;
+        }
+        
+        .animated {
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+
+        .panel-floating-fixed.dismissed {
+            -webkit-animation-name: bounceOutDown;
+            animation-name: bounceOutDown;
+            -webkit-animation-delay: 0s;
+            animation-delay: 0s;
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+        }
+
+        .panel-floating-fixed {
+            display: block;
+            position: fixed;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+            bottom: 20px;
+            right: 20px;
+            width: 280px;
+            margin-bottom: 0;
+            border-top: 5px solid #01796F;
+            overflow: hidden;
+            padding: 10px;
+            font-size: 14px;
+            z-index: 4;
+            -webkit-animation-name: bounceInUp;
+            animation-name: bounceInUp;
+            -webkit-animation-delay: 1s;
+            animation-delay: 1s;
+            -webkit-animation-duration: 1.2s;
+            animation-duration: 1.2s;
+        }
+        /* End Pop Up Panel */
+    </style>
+</head>
+<body class="sb-hidden">
+
+    <!-- Push side menu -->
+    <nav id="menu" class="panel sidebar sidebar-hidden">
+        <h4>My Portfolio</h4>
+        <ul>
+            <li>Lorem Ipsum</li>
+            <li>Dolor Sit Amet</li>
+            <li>Consectetur</li>
+            <li>Adipiscing Elit</li>
+        </ul>
+    </nav>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand"> 
+                    <img alt="Brand" id="brand-logo" src="google-sketchup.svg">
+                </a> 
+
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">Link</a></li>
+                    <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Glyphicons -->
+                    <li><a href="#"><span class="glyphicon glyphicon-off" aria-label="Power Off"></span></a></li>
+                    <li><a href="#">Link</a></li>
+                    <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <!-- Sidebar Button -->
+    <div class="row">
+        <div class="col-xs-12 menu-fixed-button" id="expander-button">
+            <span id="button-text" class="glyphicon glyphicon-menu-hamburger"></span>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <br>
+
+    <!-- Page Content -->
+    <div class="container">
+        <!-- Breadcrumbs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Library</a></li>
+                    <li class="active">Data</li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row  -->
+
+        <!-- Media Controls -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default" aria-label="Backward"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span></button>
+                    <button type="button" class="btn btn-default" aria-label="Play/Pause" id="pause-play"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></button>
+                    <button type="button" class="btn btn-default" aria-label="Forward"><span class="glyphicon glyphicon-forward" aria-hidden="true"></span></button>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Portfolio Item Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Thomas's Portfolio
+                    <small>Item Subheading</small>
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Portfolio Item Row -->
+        <div class="row">
+
+            <div class="col-md-8">
+                <img class="img-responsive" src="https://vignette2.wikia.nocookie.net/marvelmovies/images/8/81/Milano.png/revision/latest?cb=20140422031654" alt="">
+            </div>
+
+            <div class="col-md-4">
+                <h3>Project Description</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
+                <h3>Project Details</h3>
+                <ul>
+                    <li>Lorem Ipsum</li>
+                    <li>Dolor Sit Amet</li>
+                    <li>Consectetur</li>
+                    <li>Adipiscing Elit</li>
+                </ul>
+                <h3>Project Documentation</h3>
+                <p>To edit settings, press <kbd><kbd>CTRL</kbd> + <kbd>,</kbd></kbd></p>
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <!-- Related Projects Row -->
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h3 class="page-header">Related Projects</h3>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="#">
+                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="#">
+                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="#">
+                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+
+            <div class="col-sm-3 col-xs-6">
+                <a href="#">
+                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+        <!-- Fixed panel for notifications -->
+        <div id="homepageNotification" class="panel panel-default panel-floating panel-floating-fixed animated">
+            <div class="panel-body">
+                <button type="button" class="close" aria-label="Close" data-action="dismiss-homepageNotification">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <small class="text-uppercase text-muted">Huge update</small>
+                <h5 class="m-t-0">Now on Version 4.6! 😍</h5>
+                <p class="text-muted m-b">We've updated all our themes to Version 4.6! This means you can click now!</p> 
+                <a href="#" class="btn btn-full-width">Learn more</a>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Your Website 2014</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+</body>
+<script>
+    $(document).ready(function(){
+        $("#pause-play").click(function(){
+            // If the current glyphicon is the play icon...
+            if ($(this).children("span").hasClass("glyphicon-play")) {
+                // ...then change it to a pause icon.
+                $(this).children("span").removeClass("glyphicon-play");
+                $(this).children("span").addClass("glyphicon-pause");
+            }
+            // Otherwise...
+            else {
+                $(this).children("span").removeClass("glyphicon-pause");
+                $(this).children("span").addClass("glyphicon-play");
+            }
+        });
+        $("#homepageNotification").find("button.close").click(function(){
+            $(this).parents("#homepageNotification").addClass("dismissed");
+        })
+
+        $("#expander-button").click(function(){
+            if ($("#menu").hasClass("sidebar-hidden")) {
+                $("#menu").removeClass("sidebar-hidden");
+                $("#menu").addClass("sidebar-expanded");
+                $("body").removeClass("sb-hidden");
+                $("body").addClass("sb-expanded");
+                $("#expander-button").removeClass("menu-fixed-button-hidden");
+                $("#expander-button").addClass("menu-fixed-button-expanded");
+                $("#button-text").removeClass("glyphicon-menu-hamburger");
+                $("#button-text").addClass("glyphicon-remove");
+                
+            }
+            else {
+                $("#menu").removeClass("sidebar-expanded");
+                $("#menu").addClass("sidebar-hidden");
+                $("body").removeClass("sb-expanded");
+                $("body").addClass("sb-hidden");
+                $("#expander-button").removeClass("menu-fixed-button-expanded");
+                $("#expander-button").addClass("menu-fixed-button-hidden");
+                $("#button-text").removeClass("glyphicon-remove");
+                $("#button-text").addClass("glyphicon-menu-hamburger");
+            }
+        })
+
+    });
+</script>
+</html>

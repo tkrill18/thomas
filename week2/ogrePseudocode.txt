@@ -1,0 +1,18 @@
+Setup HTML elements
+Add Title to HTML - requires setup
+Show user stats (HP, gold, numberDefeated) - requires setup
+Add a random ogre image to start of body tag - requires setup
+When player clicks an 'attack' button - requires setup
+    if player has HP
+        if player defeates ogre
+            add paragraph tag saying "you win"
+            + gold to player
+            + number of defeated ogres
+        else 
+            add paragraph tag saying "you lost"
+            - gold
+            - HP
+        updateStats
+        Add random ogre image
+    else
+        add paragraph tag saying "Game Over"
