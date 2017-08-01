@@ -6,6 +6,8 @@ $(document).ready(function() {
     $("#next-button").on("click", function() {
         $("#guess-input").val("");
         $("#answer").html("Enter your guess:");
+        $("#next-button").addClass("disabled");
+        $("#next-button").prop("disabled", true);
         var pokedexNum = Math.floor(Math.random() * 721);
         getPkmnAjax(pokedexNum);
         $("body").addClass("bg-faded");
@@ -58,8 +60,6 @@ function getPkmnAjax(pokedexNum) {
         currentPkmnName = name;
         $(".loader").hide();
         $("#trial").show();
-        $("#next-button").addClass("disabled");
-        $("#next-button").prop("disabled", true);
         $("#submit-button").removeClass("disabled");
         $("#submit-button").prop("disabled", false);
         $("#guess-input").prop("disabled", false);
