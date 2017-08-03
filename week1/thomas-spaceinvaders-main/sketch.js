@@ -1,3 +1,5 @@
+// This solution is just the main section of the prompt, no bonuses.
+
 var alienGridUnit, charSideLength, projectileSpeed;
 var aliens, projectiles;
 var keyShift, spaceshipX, spaceshipY;

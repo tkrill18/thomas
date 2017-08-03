@@ -50,20 +50,23 @@ $(document).ready(function() {
 function getPkmnAjax(pokedexNum) {
     $("#trial").hide();
     $(".loader").show();
-    $.ajax({
-        url: basePokeAPIURL + pokedexNum
-    }).done(function(data) {
-        var name = data.name;
-        var imgURL = data.sprites.front_default;
-        $("#trial").attr('src', imgURL);
-        $("#trial").css("filter", "brightness(0)");
-        currentPkmnName = name;
-        $(".loader").hide();
-        $("#trial").show();
-        $("#submit-button").removeClass("disabled");
-        $("#submit-button").prop("disabled", false);
-        $("#guess-input").prop("disabled", false);
-        $("#guess-input").focus();
-    });
+    $.getJSON(basePokeAPIURL + pokedexNum)
+        .done(function(data) {
+            var name = data.name;
+            var imgURL = data.sprites.front_default;
+            $("#trial").attr('src', imgURL);
+            $("#trial").css("filter", "brightness(0)");
+            currentPkmnName = name;
+            $(".loader").hide();
+            $("#trial").show();
+
+            $("#submit-button").removeClass("disabled");
+            $("#submit-button").prop("disabled", false);
+            $("#guess-input").prop("disabled", false);
+            $("#guess-input").focus();
+        })
+        .fail(function() {
+            console.log("Failed loading Pokemon #" + pokedexNum);
+        });
 }
 

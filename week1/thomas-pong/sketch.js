@@ -1,7 +1,7 @@
 var x, y, radius, xVelocity, yVelocity, paddleY, adj, lostGame, keyShift;
 function setup() {
     createCanvas(600, 600);
-    rectMode(CENTER);
+    rectMode(CENTER);       // Rectangles will be drawn based off thier center, not upper-left corner.
     x = width / 2;
     y = height / 2;
     radius = width / 30;
@@ -9,7 +9,7 @@ function setup() {
     yVelocity = 2;
     adj = 5;
     lostGame = false;
-    keyShift = height / 10;
+    keyShift = height / 10; // This is how much pressing a key will move the paddle.
     paddleY = height / 2;
 }
 
@@ -57,11 +57,13 @@ function draw() {
 }
 
 // BONUS 1)     Lets the user control the game via mouse AND keyboard.
+// Moves the paddle's vertical position to where the mouse is.
 function mouseMoved() {
     paddleY = mouseY;
     keepPaddleInBounds();
 }
 
+// Moves the paddle up or down based on which key was pressed.
 function keyPressed() {
     if (keyCode == UP_ARROW) {
         paddleY -= keyShift;
@@ -72,6 +74,7 @@ function keyPressed() {
     keepPaddleInBounds();
 }
 
+// Prevents the user from moving the paddle off the screen.
 var keepPaddleInBounds = function() {
     // If paddle hits the top.
     if (paddleY < (height / 12)) {

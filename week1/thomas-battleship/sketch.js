@@ -4,16 +4,16 @@ var score, message;
 
 function setup() {
     createCanvas(600, 600);
+    numSquares = 5;     // This number can be changed to make more or less squares.
+    gridUnit = width / numSquares;
 // BONUS 1)     Lets the user reset the board.
     resetSketch();
     createP("");    // Adds a line break after the canvas for layout purposes.
     var button = createButton("Reset"); // Initializes a button; it will say "Reset".
-    button.mousePressed(resetSketch);   // When the button is pressed, `resetSketch` will be called.
+    button.mousePressed(resetSketch);   // When this button is pressed, `resetSketch` will be called.
 }
 
 function resetSketch() {
-    numSquares = 5;
-    gridUnit = width / numSquares;
 // BONUS 2      Tracks the user's score. (Starts off with total, subtracts off for each miss.)
     score = (numSquares * numSquares / 2) * 100;
 
@@ -25,6 +25,8 @@ function resetSketch() {
     message = "";
 
 // MAIN 2-B)    Creates a nested array of values.
+
+    // You could also manually type out the whole array, but I tried to do this efficiently.
 
     // Problem: when pushing an existing array, it is copied byref, not by val...
     // ... so the existing array is edited every time.
@@ -50,6 +52,7 @@ function draw() {
     for (var r = 0; r < numSquares; r++) {
         for (var c = 0; c < numSquares; c++) {
 // MAIN 2-C)    Changes the color based on hit or miss.
+            // KEY:
             // 0 = not clicked yet, 1 = miss, 2 = hit
             if (grid[r][c] == 0) {
                 fill("grey");
@@ -76,6 +79,7 @@ function draw() {
 }
 
 function mouseClicked() {
+    // Determines which row and column the click occured in.
     var row = floor(mouseX / gridUnit);
     var col = floor(mouseY / gridUnit);
     console.log("User chose:     " + row + ", " + col);
@@ -83,7 +87,9 @@ function mouseClicked() {
     if (row == shipRow && col == shipCol) {
         console.log("HIT");
         grid[row][col] = 2;
+        // Ends the game.
         message = "Score: " + score;
+        noLoop();   // Prevents further draw loops.
     }
     else {
         console.log("MISS");

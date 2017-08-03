@@ -1,3 +1,5 @@
+// This solution has in addition to the main program, bonus 1A.
+
 var alienGridUnit, charSideLength, projectileSpeed;
 var aliens, spaceshipProjectiles, alienProjectiles;
 var keyShift, spaceshipX, spaceshipY;

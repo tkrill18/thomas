@@ -90,7 +90,7 @@ function keyTyped() {
     }
 }
 
-// My iteration: allows the user to backspace.
+// EXTRA: My Iteration: Allows the user to backspace.
 function keyPressed() {
     if (keyCode == BACKSPACE) {
         userString = userString.slice(0, -1);
