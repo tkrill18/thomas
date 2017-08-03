@@ -8,8 +8,11 @@ body {
     text-transform: capitalize;
 }
 
-
 img {
     width: 25vmax;
     height: 25vmax;
+}
+
+.jumbotron p {
+    font-weight: 600;
 }

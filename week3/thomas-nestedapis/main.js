@@ -1,6 +1,8 @@
 // Defines global variables for later use.
 var randomUserURL = "https://randomuser.me/api/";
-var restCountriesURL = "https://restcountries.eu/rest/v2/alpha"
+var restCountriesURL = "https://restcountries.eu/rest/v2/"
+
+var availableCodes = ["AU", "BR", "CA", "CH", "DE", "DK", "ES", "FI", "FR", "GB", "IE", "IR", "NL", "NZ", "TR", "US"];
 
 // Makes an AJAX call to the RU API.
 $.ajax({
@@ -8,11 +10,6 @@ $.ajax({
 }).done(function(data){
     handleRUData(data);
 });
-
-// Makes an AJAX call to the RC API for country names.
-// $.ajax({
-//     url:restCountriesURL +
-// })
 
 var handleRUData = (data) => {
     // Parses the JSON for relevant information.
@@ -22,16 +19,12 @@ var handleRUData = (data) => {
     var photo = data.results[0].picture.large;
     var countryCode = data.results[0].nat;
 
-    for (var i = 0; i < 10; i++) {
-        $(".dropdown-menu").append(
-            "<li><a href='#'>Action " + i +"</a></li>"
-        )
-    }
+    var age = 2017 - data.results[0].dob.split("-")[0];
 
     // Appends the RU information to the DOM.
-    $("#card").append(
+    $("#card").html(
         "<h1>" +
-            firstName + " " + lastName +
+            firstName + " " + lastName + ", " + age +
         "</h1>" +
         "<h2 id='location'>" +
             state +
@@ -43,7 +36,7 @@ var handleRUData = (data) => {
 
     // Makes a call to the RC API.
     $.ajax({
-        url:restCountriesURL + "?codes=" + countryCode
+        url:restCountriesURL + "alpha/?codes=" + countryCode
     }).done(function(data){
         handleRCData(data);
     });
@@ -56,6 +49,37 @@ var handleRCData = (data) => {
     $("#location").html(currentString + ", " + countryName);
 }
 
-var loadRCDropdown = () => {
+// Makes an AJAX call to the RC API for country names.
+$.ajax({
+    url:restCountriesURL + "all"
+}).done(function(data) {
+    loadRCDropdown(data);
+})
 
+var loadRCDropdown = (data) => {
+    for (country of data) {
+        //console.log(country.name);
+        if (availableCodes.indexOf(country.alpha2Code) != -1) {
+            $("#mySelect").append(
+                "<option value=" + country.alpha2Code + ">"+ country.name + "</option>"
+            )
+        }
+    }
+    $("#myLabel").html("<p>Choose a country to meet somebody from&hellip;</p>")
+    $("#mySelect").prop("disabled", false);
 }
+
+// Document Ready
+$(function() {
+    $("#mySelect").on('change', function() {
+        var countryCode = $(this).val();
+        $.ajax({
+            url:randomUserURL + "?nat=" + countryCode
+        }).done(function(data){
+            handleRUData(data);
+        });
+    });
+
+})
+
+
