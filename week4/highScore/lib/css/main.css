@@ -1,0 +1,83 @@
+body {
+    /* Uses the system font. */
+    /* From GitHub (added Roboto) */
+    font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+
+#wins, #ties, #losses {
+    font-variant-numeric: slashed-zero;
+    font-variant-numeric: tabular-nums;  
+}
+
+/* Places whitespace on margins for large displays */
+@media (min-width: 992px) {
+    .container-fluid {
+        max-width: 75%;
+    }
+}
+
+.popover {
+    /* GitHub font stack + Roboto */
+    font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.popover-danger {
+    background-color: #D41C1C;
+    border-color: #D41C1C;
+    color: white;
+}
+
+.popover-danger>.popover-title {
+    background-color: #AF0B0B;
+    border-color: #910000;
+    color: white;
+}
+
+.popover-danger.bottom .arrow:after {
+    border-bottom-color: #D41C1C;
+}
+
+.popover-success {
+    background-color: #16A916;
+    border-color: #16A916;
+    color: white;
+}
+
+.popover-success>.popover-title {
+    background-color: #098C09;
+    border-color: #007400;
+    color: white;
+}
+
+.popover-success.bottom .arrow:after {
+    border-bottom-color: #16A916;
+}
+
+.fa-arrow-up {
+    color: #3D9400;
+}
+
+.fa-arrow-down {
+    color: #DD4B39
+}
+
+.fa-arrow-right {
+    color: #999999
+}
+
+.title {
+    font-weight: 900;
+}
+
+span.bold {
+    font-weight: 700;
+}
+
+/* From animate.css `https://daneden.github.io/animate.css/` */
+.title {
+    color: #3FBCFF;
+    background-image: -webkit-linear-gradient(92deg,#3FBCFF, #3DF49F); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

@@ -1,0 +1,130 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rock, Paper, Scissors</title>
+
+    <!-- Theme color for Google Chrome Mobile -->
+    <meta name="theme-color" content="#3FBCFF">
+    
+    <!-- Google Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+        <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyByPrJty7lrh_9e_NV3fB1JqIB-ZXNofvc",
+            authDomain: "rockpaperscissors-d3468.firebaseapp.com",
+            databaseURL: "https://rockpaperscissors-d3468.firebaseio.com",
+            projectId: "rockpaperscissors-d3468",
+            storageBucket: "rockpaperscissors-d3468.appspot.com",
+            messagingSenderId: "306687831637"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,900" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">   
+    
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- FontAwesome JS  -->
+    <script src="https://use.fontawesome.com/2f7fe778bd.js"></script>
+    <!-- FontAwesome CSS -->
+    <link href="https://use.fontawesome.com/2f7fe778bd.css" media="all" rel="stylesheet">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="lib/css/main.css">
+    <!-- My JS -->
+    <script src="lib/js/main.js"></script>
+
+</head>
+<body>
+    <div class="container-fluid text-center">
+        <!-- Modal -->
+        <div class="modal fade" id="modal-file-save" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">We can only save <strong>one</strong> game file.</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Would you like us to <em>save your current game</em> and remove your previous game file, <br><strong>or</strong> <em>load your previous game</em> and discard your current game file?</p> 
+                        <p id="display-current">Current Game: XX Wins, XX Ties, XX Losses</p>
+                        <p id="display-previous">Previous Game: XX Wins, XX Ties, XX Losses</p>
+                        <p id="display-recommend">We recommend your default game, it has a winning percentage of XX%</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="cancel" type="button" class="btn btn-default btn-modal" data-dismiss="modal">Cancel</button>
+                        <button id="current" type="button" class="btn btn-info btn-modal">Save current game</button>
+                        <button id="previous" type="button" class="btn btn-info btn-modal">Load previous game</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <!-- Title -->
+        <h1 class="title">Rock, Paper, Scissors</h1>
+
+        <!-- Scoreboard -->
+        <div class="row">
+            <div class="col-xs-6">
+                <h3 id="high-score">&nbsp;</h3>
+            </div> <!-- /.col-xs-4 -->
+            <div class="col-xs-6">
+                <h3 id="your-score">&nbsp;</h3>
+            </div> <!-- /.col-xs-4 -->
+        </div> <!-- /.row -->
+        <div class="row">
+            <div class="col-xs-4">
+                <h3>Wins:</h3>
+                <h2 id="wins">00</h2>
+            </div> <!-- /.col-xs-4 -->
+            <div class="col-xs-4">
+                <h3>Ties:</h3>
+                <h2 id="ties">00</h2>
+            </div> <!-- /.col-xs-4 -->
+            <div class="col-xs-4">
+                <h3>Losses:</h3>
+                <h2 id="losses">00</h2>
+            </div> <!-- /.col-xs-4 -->
+        </div> <!-- /.row -->
+
+        <!-- Game Result -->
+        <div class="jumbotron">
+            <h2 id="playChoice">&nbsp;</h2>
+            <h2 id="compChoice">&nbsp;</h2>
+            <h2 id="result">&nbsp;</h2>
+        </div> <!-- /.jumbotron -->
+
+        <!-- Controls -->
+        <div class="btn-group btn-group-lg btn-group-justified">
+            <a href="#" class="btn btn-info btn-choice" id="r">Rock</a>
+            <a href="#" class="btn btn-info btn-choice" id="p">Paper</a>
+            <a href="#" class="btn btn-info btn-choice" id="s">Scissors</a>
+        </div> <!-- /.btn-group -->
+
+        <br>
+
+        <!-- User Information Entry -->
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="initials">Initials</label>
+                <input type="text" class="form-control" id="initials" placeholder="Enter at least two letters.">
+            </div>
+            <button type="button" class="btn btn-info" id="log-in"><i class="fa fa-sign-in" aria-hidden="true"></i> Log In</button>
+            <button type="button" class="btn btn-info" id="save" disabled><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+            <button type="reset" class="btn btn-info" id="log-out" disabled><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</button>
+        </form>
+
+    </div> <!-- /.container-fluid -->
+</body>
+
+</html>
